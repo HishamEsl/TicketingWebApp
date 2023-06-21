@@ -1,0 +1,24 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+// Start Tickets
+
+.companies {
+  padding: $section-padding;
+  min-height: Calc(100vh - 80px);
+
+
+  .table-responsive {
+    tr {
+      background-color: #fff;
+
+      td {
+        padding: 16px;
+      }
+    }
+
+    .badge {
+      min-width:80px;
+    }
+  }
+}

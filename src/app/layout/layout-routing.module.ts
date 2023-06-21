@@ -26,12 +26,31 @@ const routes: Routes = [
         loadChildren: () =>
           import('./teams/teams.module').then((m) => m.TeamsModule),
       },
-      { path: 'accountOnHold', loadChildren: () => import('./client-validation/client-validation.module').then(m => m.ClientValidationModule) },
+      {
+        path: 'accountOnHold',
+        canActivate: [AdminGuard],
+        loadChildren: () =>
+          import('./client-validation/client-validation.module').then(
+            (m) => m.ClientValidationModule
+          ),
+      },
+      {
+        path: 'company',
+        canActivate: [AdminGuard],
+        loadChildren: () =>
+          import('./company/company.module').then((m) => m.CompanyModule),
+      },
+      {
+        path: 'projects',
+        canActivate: [AdminGuard],
+        loadChildren: () =>
+          import('./projects/projects.module').then((m) => m.ProjectsModule),
+      },
       {
         path: 'tickets',
         loadChildren: () =>
           import('./tickets/tickets.module').then((m) => m.TicketsModule),
-        },
+      },
       {
         path: 'faqs',
         loadChildren: () => import('./faq/faq.module').then((m) => m.FaqModule),

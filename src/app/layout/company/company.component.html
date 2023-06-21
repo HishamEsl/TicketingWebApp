@@ -1,0 +1,105 @@
+<section class="companies section-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 heading d-flex justify-content-between">
+      <div>
+        <h2>All Companies</h2>
+      </div>
+     <div class="d-flex">
+      <div class="d-flex mx-3">
+        <!-- App Search-->
+        <form class="app-search d-none d-xl-block">
+          <div class="position-relative search-box">
+            <input type="text"  class="form-control form-control-lg" placeholder="Search..." name="search" [(ngModel)]="searchText" />
+            <img
+              class="position-absolute top-50 translate-middle-y search-icon"
+              src="../../../assets/icons/svg/search.svg"
+              alt="Search_ICON"
+            />
+          </div>
+        </form>
+      </div>
+
+      <button  type="button" class="btn btn-main" (click)="openLg(ticketsContent)"> Add New Company </button>
+   
+    </div>
+
+  
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class>
+              <div class="table-responsive" *ngIf="companies$ |async as companies">
+                <table
+                  class="table project-list-table table-nowrap align-middle table-borderless"
+                >
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col" style="width: 100px">#</th> -->
+                      <th scope="col">Company Name</th>
+                      <th scope="col">options</th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let company of companies |searchFilter:'title':searchText" >
+                    
+                      <td>{{company.name}}</td>
+                      <td>
+<a (click)="onRemoveCompany(company.id)">
+    <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 16C1 17.1 1.9 18 3 18H11C12.1 18 13 17.1 13 16V6C13 4.9 12.1 4 11 4H3C1.9 4 1 4.9 1 6V16ZM13 1H10.5L9.79 0.29C9.61 0.11 9.35 0 9.09 0H4.91C4.65 0 4.39 0.11 4.21 0.29L3.5 1H1C0.45 1 0 1.45 0 2C0 2.55 0.45 3 1 3H13C13.55 3 14 2.55 14 2C14 1.45 13.55 1 13 1Z" fill="#FF0000"/>
+        </svg>
+        
+</a>
+
+                      </td>
+                   
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+ 
+
+
+  <!-- Add New Company-->
+
+  -- <ng-template #ticketsContent let-modal>
+    <form [formGroup]="addNewCompanyForm">
+    <div class="modal-header">
+      <h4 class="modal-title">Add New Company</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="companyName">Company Name</label>
+          
+              <input type="text" id="companyName" class="form-control" formControlName="name" >
+          
+              <div *ngIf="f['name'].touched && f['name'].errors" class="text-danger">
+                <span *ngIf="f['name'].errors?.['required']">This value is required.!</span>
+            </div>
+            </div>
+          </div>
+    </div>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-main" (click)="onCreatNewCompanyClicked() ; modal.dismiss('Cross click')" [disabled]="addNewCompanyForm.invalid">Add</button>
+    </div>
+  </form>
+  </ng-template>

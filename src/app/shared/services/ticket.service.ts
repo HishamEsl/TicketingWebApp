@@ -8,6 +8,7 @@ import { IProject } from '../models/projects.model';
 import { IStat } from '../models/statistic.model';
 import { IStatus } from '../models/status.model';
 import { IUser } from '../models/user.model';
+import { ICompany } from '../models/company.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,8 @@ export class TicketService {
   private allPriorityURL = 'odata/priority';
   private statisticsURL = 'odata/statistics';
   private accountURL = 'odata/accounts';
+  private companiesURL = 'odata/companies';
+  private clientURL = 'odata/clients';
 
   clientIdSelectedSubject = new BehaviorSubject<string>('');
   clientIdSelectedAction$ = this.clientIdSelectedSubject.asObservable();
@@ -177,10 +180,11 @@ export class TicketService {
       );
   }
 
-
-    // // Get Hold Users 
-    usersOnHold$ = this._http
-    .get<IStatus[]>(UrlEndpoints.apiRoot + this.usersURL+`?$filter=IsOnHold eq true`)
+  // // Get Hold Users
+  usersOnHold$ = this._http
+    .get<IStatus[]>(
+      UrlEndpoints.apiRoot + this.usersURL + `?$filter=IsOnHold eq true`
+    )
     .pipe(
       map((employees: any) => {
         return employees['value'] as IEmployee[];
@@ -188,15 +192,13 @@ export class TicketService {
       shareReplay(1)
     );
 
-     // Patch Account IsOnHold
+  // Patch Account IsOnHold
 
-  
   partUpdateAccount = (userId: string, model: any) =>
-  this._http.patch(
-    UrlEndpoints.apiRoot + this.accountURL + `(${userId})`,
-    model
-  );
-
+    this._http.patch(
+      UrlEndpoints.apiRoot + this.accountURL + `(${userId})`,
+      model
+    );
 
   statistic(userId: string) {
     return this._http
@@ -228,6 +230,19 @@ export class TicketService {
         shareReplay(1)
       );
   }
+
+    // Post Company
+    postProject(model: any) {
+      return this._http
+        .post<any>(UrlEndpoints.apiRoot + this.projectsURL, model)
+        .pipe(
+          map((project: any) => {
+            return project as any;
+          }),
+          shareReplay(1)
+        );
+    }
+  
   // // Get All Status
   statuses$ = this._http
     .get<IStatus[]>(UrlEndpoints.apiRoot + this.allStatusURL)
@@ -255,7 +270,44 @@ export class TicketService {
     this.ticketInsertedSubject.next(model);
   }
 
+  // get All  compnanies
+  companies$ = this._http
+    .get<any[]>(UrlEndpoints.apiRoot + this.companiesURL)
+    .pipe(
+      map((companies: any) => {
+        return companies['value'] as any[];
+      }),
+      shareReplay(1)
+    );
 
+  //Remove Company
+  removeCompany = (companyId: number) =>
+    this._http.delete(
+      UrlEndpoints.apiRoot + this.companiesURL + `(${companyId})`
+    );
 
- 
+  // Post Company
+  postCompany(model: ICompany) {
+    return this._http
+      .post<any>(UrlEndpoints.apiRoot + this.companiesURL, model)
+      .pipe(
+        map((company: any) => {
+          return company as ICompany;
+        }),
+        shareReplay(1)
+      );
+  }
+
+  // get All Clients
+  clients$ = this._http
+    .get<any[]>(
+      UrlEndpoints.apiRoot +
+        this.clientURL
+    )
+    .pipe(
+      map((clients: any) => {
+        return clients as any[];
+      }),
+      shareReplay(1)
+    );
 }
