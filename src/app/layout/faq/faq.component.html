@@ -1,0 +1,55 @@
+<section class="faqs section-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 heading">
+          <h2>FAQS</h2>
+        </div>
+      </div>
+  
+      <div class="row">
+        <h3>How can help you ?</h3>
+  
+        <div class="video">
+          <!-- 16:9 aspect ratio -->
+          <div class="ratio ratio-21x9">
+            <!-- <iframe
+              src="https://www.youtube.com/embed/1y_kfWUCFDQ"
+              class="embed-responsive-item"
+            ></iframe> -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/oFBgLo1VJdE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row details mt-5">
+        <div class="col-12 col-md-6" *ngFor="let faq of faqs">
+          <div class="card mb-3">
+            <div class="card-title d-flex align-items-center">
+              <div class="icon">
+                <svg
+                  width="18"
+                  height="14"
+                  viewBox="0 0 18 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.00996 5.6447L17.1896 5.64432M2.48089 1.23202L15.7188 1.23172C16.5312 1.2317 17.1897 1.89022 17.1897 2.70256L17.1896 11.5278C17.1896 12.3402 16.531 12.9987 15.7187 12.9988L2.48076 12.9991C1.66842 12.9991 1.00989 12.3406 1.0099 11.5282L1.00999 2.70294C1.01 1.89059 1.66855 1.23204 2.48089 1.23202Z"
+                    stroke="#FF731D"
+                    stroke-width="1.47088"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <span class="mx-3"> {{ faq.question }}</span>
+            </div>
+            <p class="card-text">
+              {{ faq.answer }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

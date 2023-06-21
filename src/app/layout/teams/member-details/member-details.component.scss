@@ -1,0 +1,57 @@
+@import "../../../../assets/scss/global";
+@import "../../../../assets/scss/varibles";
+
+.member {
+  padding: $section-padding;
+  min-height: Calc(100vh - 80px);
+
+  .overview {
+    margin-top: 16px;
+    .card {
+      padding: 24px;
+      img {
+        width: 56px;
+        height: 56px;
+    }
+    .table-responsive {
+      thead,
+      tbody,
+      tfoot,
+      tr,
+      td,
+      th {
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0;
+      }
+      th {
+        font-size: $fs-md;
+        font-weight: $fw-lg;
+      }
+      tr {
+        background-color: #fff;
+  
+        td {
+          font-size: $fs-sm;
+          font-weight: $fw-md;
+          color: $secondary-gray-color;
+        }
+      }
+    }
+    }
+  }
+
+  .tickets {
+    margin-top: 32px;
+
+    .table-responsive {
+        tr {
+          background-color: #fff;
+    
+          td {
+            padding: 16px;
+          }
+        }
+      }
+  }
+}

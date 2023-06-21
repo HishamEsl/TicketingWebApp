@@ -1,0 +1,15 @@
+
+@import "../../../assets/scss/global" ;
+@import "../../../assets/scss/varibles" ;
+
+// Start Dashboard
+
+.dashboard{
+    padding: $section-padding;
+    min-height: Calc(100vh - 80px);
+
+    .ct-chart {
+        width: 400px;
+        height: 300px;
+      }
+}

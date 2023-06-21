@@ -1,0 +1,41 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+// Start Tickets
+
+.faqs {
+  padding: $section-padding;
+//   min-height: Calc(100vh - 80px);
+  .video {
+    margin-top: 18px;
+    h3 {
+      font-size: $fs-md;
+      font-weight: $fw-lg;
+    }
+
+  }
+
+  .details{
+    margin-top: 20px;
+
+    .card{
+        padding: 8px 12px;
+        min-height: 180px;
+        .icon{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color:#F4F4F4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p{
+            color:$text-gray ;
+            line-height: 2rem;
+        }
+    }
+
+  }
+}

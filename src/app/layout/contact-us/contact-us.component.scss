@@ -1,0 +1,61 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+// Start Dashboard
+
+.contact-us {
+  padding: $section-padding;
+  min-height: Calc(100vh - 80px);
+
+  .contacts,
+  .work-details {
+    margin-top: 24px;
+    .card {
+      padding: 24px;
+      .card-body {
+        .card-title {
+          h5 {
+            font-size: $fs-sm;
+            font-weight: $fw-md;
+          }
+        }
+        p {
+          margin-top: 32px;
+        }
+
+        .details {
+          margin-top: 24px;
+          ul li {
+            margin-bottom: 12px;
+            color: $secondary-gray-color;
+            svg {
+              width: 16px;
+              height: 16px;
+              margin-right: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.work-details {
+  svg {
+    width: 16px;
+    height: 16px;
+    margin: 16px;
+  }
+  .table-responsive {
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    td,
+    th {
+      border-color: inherit;
+      border-style: solid;
+      border-width: 0;
+    }
+  }
+}

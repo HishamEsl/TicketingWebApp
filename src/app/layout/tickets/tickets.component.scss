@@ -1,0 +1,39 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+// Start Tickets
+
+.tickets {
+  padding: $section-padding;
+  min-height: Calc(100vh - 80px);
+
+
+  .table-responsive {
+    tr {
+      background-color: #fff;
+
+      td {
+        padding: 16px;
+      }
+    }
+
+    .badge {
+      min-width:80px;
+    }
+  }
+}
+
+// Start ng-template
+
+.offcanvas-header {
+  .offcanvas-title {
+    .icon {
+      margin-right: 8px;
+    }
+    span {
+      color: $secondary-gray-color;
+    }
+  }
+}
+
+

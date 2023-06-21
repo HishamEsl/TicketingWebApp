@@ -1,0 +1,29 @@
+.admin-wrapper{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+
+    .collapsed {
+        /* Styles to apply when the sidebar is collapsed */
+        display: none !important; /* Example width */
+
+      }
+      
+      
+}
+
+.admin-content{
+    width: Calc(100% - 230px);
+    margin-left: 230px;
+    
+    transition: all 0.4 ease-in-out;
+   
+}
+
+
+   
+.fullwidth{
+    width: 100%;
+    margin-left: 0;
+    
+}

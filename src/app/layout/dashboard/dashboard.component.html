@@ -1,0 +1,27 @@
+<section class="dashboard section-bg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 heading">
+          <h2>Dashboard</h2>
+        </div>
+      </div>
+  
+     <div class="row" *ngIf="statistic$| async as statistic">
+        <div *ngFor="let stat of statistic" class="col-md-3 col-6">
+      <app-stat [title]="stat.name" [value]="stat.count" [icon]="'../../../assets/icons/svg/Label3.svg'"></app-stat>
+        </div>
+      </div>
+
+      <div class="row ">
+
+        <div id="chart" style="height: 50vh"></div>
+        
+      </div>
+      <div class="row ">
+
+        <div id="chart2" style="height: 50vh"></div>
+        
+      </div>
+    </div>
+  </section>
+  

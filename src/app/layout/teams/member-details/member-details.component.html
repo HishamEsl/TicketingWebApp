@@ -1,0 +1,147 @@
+<section class="member section-bg">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 heading">
+        <h2>Overview</h2>
+      </div>
+
+      <div class="col-12 overview" *ngIf="employee$ |async as employee">
+        <div class="card">
+          <div class="row">
+            <div class="col-1 align-items-center d-flex">
+                <img
+                class="rounded-circle header-profile-user"
+                src="../../../../assets/Avatars/avatar.png"
+                alt="Header Avatar"
+              />
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="table-responsive">
+                    <table class="table table-nowrap mb-0">
+                      <tbody>
+                        <tr>
+                          <th scope="row">Id :</th>
+                          <td>{{employee[0].id}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Name :</th>
+                          <td>{{employee[0].name}}</td>
+                        </tr>
+                 
+                      </tbody>
+                    </table>
+                    </div>
+
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="table-responsive" >
+                    <table class="table table-nowrap mb-0">
+                      <tbody>
+                        <tr>
+                          <th scope="row">Email :</th>
+                          <td>{{employee[0].email}}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Joining Date  :</th>
+                          <td>{{employee[0].joiningDate}}</td>
+                        </tr>
+                 
+                      </tbody>
+                    </table>
+                    </div>
+            </div>
+            <div class="col-md-2 col-12">
+                <div class="table-responsive">
+                    <table class="table table-nowrap mb-0">
+                      <tbody>
+                        <tr>
+                          <th scope="row">
+                            <span class="badge bg-warning"> {{employee[0].departmentName}} </span>
+                          </th>
+                        
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                            <span class="badge p-2  rounded-pill" [ngClass]="{ 'bg-success': employee[0].status === 'Open',
+                        
+                          'bg-danger': employee[0].status === 'Busy' }">{{employee[0].status}}</span> 
+                          </th>
+                        
+                        </tr>
+                 
+                      </tbody>
+                    </table>
+                    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row tickets">
+        <div class="col-12 heading">
+          <h2>Tickets</h2>
+        </div>
+
+        <div class="col-lg-12">
+            <div class>
+              <div class="table-responsive" *ngIf="employeeTickets$ |async as tickets">
+                <table
+                  class="table project-list-table table-nowrap align-middle table-borderless"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col" style="width: 100px">#</th>
+                      <th scope="col">Project Name</th>
+                      <th scope="col">Problem Title</th>
+                      <th scope="col">Company Name</th>
+                      <th scope="col">Created At </th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Priority</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let ticket of tickets">
+                      <td>{{ticket.id}}</td>
+                      <td>
+                        <h5 class="text-truncate font-size-14">
+                          <a href="javascript: void(0);" class="text-dark"
+                            >{{ticket.project.name}}
+                          </a>
+                        </h5>
+                      </td>
+                      <td>{{ticket.title}}</td>
+                      <td>{{ticket.company.name}}</td>
+                      <td>{{ticket.dateCreated | date}}</td>
+                      <td>
+                        <span class="badge p-2  rounded-pill" [ngClass]="{ 'bg-success': ticket.status.name === 'Completed',
+                      'bg-warning': ticket.status.name === 'Pending','bg-secondary': ticket.status.name === 'New',
+                      'bg-Info': ticket.status.name === 'In Progress',
+                      'bg-danger': ticket.status.name === 'Archived' }">{{ticket.status.name}}</span> 
+                      </td>
+                      <td>
+                        <span class="badge p-2  rounded-pill" [ngClass]="{ 'bg-success': ticket.priority.name === 'High',
+                      'bg-warning': ticket.priority.name === 'Medium',
+                      'bg-danger': ticket.priority.name === 'Low' }">{{ticket.priority.name}}</span> 
+                      </td>
+                      <td>
+                        <div
+                          class="dropdown"
+                          ngbDropdown
+                          placement="bottom-right"
+                        >
+                        
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        
+  </div>
+</section>

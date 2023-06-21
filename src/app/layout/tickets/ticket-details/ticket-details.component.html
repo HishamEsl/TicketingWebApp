@@ -1,0 +1,279 @@
+<section class="ticket-details section-bg">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-12 heading">
+        <h2></h2>
+      </div> -->
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card shadow p-4">
+          <div class="card-body" *ngIf="singleTicket$ | async as ticket">
+            <h4 class="card-title mb-4">{{ ticket.title }}</h4>
+
+            <p class="text-muted mb-4">
+              {{ ticket.description }}
+            </p>
+
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Company Name</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.company.name }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Project Name</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.project.name }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Client Name</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.client.name }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Email</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.email }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Phone Number</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.phoneNumber }}</p>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Created</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.dateCreated }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Last Seen </h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.lastSeen }}</p>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Estimated Time</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ ticket.estimatedTime }}</p>
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <h5 class="col-md-2 col-form-label">Status</h5>
+              <div class="col-md-10">
+                <p class="text-muted">{{ticket.status.name}}</p>
+              </div>
+            </div>
+
+            <div *ngIf="ticket.comments">
+              <div
+                class="mb-3 row border-bottom"
+                *ngFor="let coment of ticket.comments"
+              >
+                <div class="col-md-2">
+                  <img
+                    src="../../../../assets/Avatars/admin overview.png"
+                    class="avatar-xs me-3 rounded-circle"
+                    alt="img"
+                  />
+                </div>
+                <div class="col-md-10">
+                  <div class="media mb-3 d-flex">
+                    <div class="media-body">
+                      <h5 class="mt-0 mb-1 font-size-15">
+                        {{ coment.userName }}
+                      </h5>
+                      <p class="text-muted">{{ coment.content }}</p>
+
+                      <div class="text-muted font-size-12">
+                        {{coment.createdDate}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <form class="outer-repeater" [formGroup]="ticketForm">
+              <div class="outer">
+                <div *ngIf="role == 'Admin'">
+                  <div class="mb-3 row" *ngIf="emplyees$ | async as employees">
+                    <label class="col-md-2 col-form-label" for="assignTo"
+                      >Assign to</label
+                    >
+                    <div class="col-md-10">
+                      <select
+                        class="form-select"
+                        id="assignTo"
+                        formControlName="assignTo"
+                      >
+                        <option value="" selected disabled>Assign to</option>
+                        <option
+                          [value]="employee.id"
+                          *ngFor="let employee of employees"
+                        >
+                          {{ employee.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div
+                    class="mb-3 row"
+                    *ngIf="priorities$ | async as priorities"
+                  >
+                    <label class="col-md-2 col-form-label" for="priority"
+                      >Priority</label
+                    >
+                    <div class="col-md-10">
+                      <select
+                        class="form-select"
+                        id="priority"
+                        formControlName="priority"
+                      >
+                        <option value="" selected disabled>
+                          Select priority
+                        </option>
+                        <option
+                          [value]="priority.id"
+                          *ngFor="let priority of priorities"
+                        >
+                          {{ priority.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="estimatedTime" class="col-md-2 col-form-label"
+                      >Estimated time</label
+                    >
+                    <div class="col-md-10">
+                      <input
+                        class="form-control"
+                        type="datetime-local"
+                        id="estimatedTime"
+                        formControlName="estimatedTime"
+                      />
+                    </div>
+                  </div>
+                  <!-- Start comment -->
+                  <div class="class-room mb-2" formArrayName="comments">
+                    <ng-container
+                      *ngFor="
+                        let comment of getComment().controls;
+                        let commentIndex = index
+                      "
+                    >
+                      <div [formGroupName]="commentIndex">
+                        <div class="mb-3 row">
+                          <label for="comment" class="col-md-2 col-form-label"
+                            >comment</label
+                          >
+                          <div class="col-md-10">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="comment"
+                              formControlName="comment"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  <!-- End Subject-->
+                  <button
+                    type="button"
+                    class="btn btn-secondary m-1"
+                    (click)="addComment()"
+                  >
+                    Add New Comment
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-main float-end"
+                    (click)="onTicketDetailsAdminSubmit(ticket)"
+                    [disabled]="ticketForm.invalid"
+                  >
+                    Submit
+                  </button>
+                </div>
+                <div *ngIf="role == 'Employee'">
+                  <div class="mb-3 row" *ngIf="statues$ | async as statues">
+                    <label class="col-md-2 col-form-label" for="status"
+                      >Change Status To</label
+                    >
+                    <div class="col-md-10">
+                      <select
+                        class="form-select"
+                        id="status"
+                        formControlName="status"
+                      >
+                        <option [value]="ticket.statusId" selected disabled >
+                        {{ticket.status.name}}
+                        </option>
+                        <option
+                          [value]="status.id"
+                          *ngFor="let status of statues"
+                        >
+                          {{ status.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Start comment -->
+                  <div class="class-room mb-2" formArrayName="comments">
+                    <ng-container
+                      *ngFor="
+                        let comment of getComment().controls;
+                        let commentIndex = index
+                      "
+                    >
+                      <div [formGroupName]="commentIndex">
+                        <div class="mb-3 row">
+                          <label for="comment" class="col-md-2 col-form-label"
+                            >comment</label
+                          >
+                          <div class="col-md-10">
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="comment"
+                              formControlName="comment"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                  <!-- End Subject-->
+                  <button
+                    type="button"
+                    class="btn btn-secondary m-1"
+                    (click)="addComment()"
+                  >
+                    Add New Comment
+                  </button>
+                  <button
+                    type="submit"
+                    class="btn btn-main float-end"
+                    (click)="onTicketDetailsEmployeeSubmit(ticket)"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

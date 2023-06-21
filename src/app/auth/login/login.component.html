@@ -1,0 +1,59 @@
+<!-- Start Login Page -->
+<section class="login w-100 h-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-12 px-md-5 ">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title text-center">LOGIN</h5>
+            <form [formGroup]="loginForm">
+              <div class="mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@example.com"
+                  formControlName="email" [ngClass]="{
+                    'is-invalid': f['email'].touched && f['email'].errors
+                  }" 
+                />
+                <div *ngIf="f['email'].touched && f['email'].errors" class="text-danger">
+                    <span *ngIf="f['email'].errors?.['required']">This value is required.!</span>
+                    <span *ngIf="f['email'].errors?.['email']">This value should be email!</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="password"
+                  formControlName="password" [ngClass]="{
+                    'is-invalid': f['password'].touched && f['password'].errors
+                  }" 
+                />
+                <div *ngIf="f['password'].touched && f['password'].errors" class="text-danger">
+                    <span *ngIf="f['password'].errors?.['required']">This value is required.!</span>
+                </div>
+              </div>
+
+              <div class="d-grid gap-2 login-btn">
+              
+                <button class="btn btn-main" type="button" [disabled]="loginForm.invalid"
+                (click)="onLoginSubmit()">Login</button>
+              </div>
+            </form>
+
+
+            <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+
+            
+            <p class="mt-5">
+                Don’t have an account yet?<a class="mx-2 txt-primary" routerLink="/auth/register">SignUp</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

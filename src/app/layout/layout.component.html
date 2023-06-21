@@ -1,0 +1,10 @@
+<div class="admin-wrapper">
+<div  class="side" style="width: 180px;" [class.collapsed]="isCollapsed">
+    <app-sidebar ></app-sidebar>
+
+</div>
+    <div class="admin-content" [class.fullwidth]="isCollapsed">
+     <app-topbar (collapseToggle)="toggleSidebar()"></app-topbar>
+        <router-outlet></router-outlet>
+    </div>
+</div>

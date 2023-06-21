@@ -1,0 +1,92 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+@font-face {
+    font-family: 'main-font';
+    src: url(./assets/fonts/Poppins-Regular.ttf);
+}
+
+*{
+    font-family: 'main-font' !important;
+}
+
+.cursor{
+    cursor: pointer;
+  }
+  
+
+  .offcanvas.offcanvas-end {
+    padding: 0 20px;
+    width: 350px !important;
+  }
+  
+  .accordion-item{
+    border: 0 !important;
+  }
+
+  // radio buttons styles
+input[type='radio']:after {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #fff;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid rgba(4, 9, 33, 0.32);
+}
+
+input[type='radio']:checked:after {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+    line-height: 10px;
+  top: -4px;
+  left: -3px;
+  position: relative;
+  color: white;
+  background-color: #24CE3F;
+  content:  "✓";
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #24CE3F;
+  font-weight: 800;
+}
+.form-check-input{
+  border: 0 !important;
+}
+.form-check-input:checked{
+  background-color: #fff !important;
+}
+.form-check-input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow:none;
+}
+
+.bg-success{
+  background-color: #34c38f !important;
+}
+.bg-warning{
+  background-color: #f1b44c !important;
+  
+}
+.bg-secondary{
+  background-color: #767676 !important;
+  
+}
+.bg-danger{
+  background-color: #f46a6a !important;
+  
+}
+.bg-info{
+  background-color: #50a5f1  !important;
+  
+}

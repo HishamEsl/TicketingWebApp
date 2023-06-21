@@ -1,0 +1,9 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+// Start Tickets
+
+.profile {
+  padding: $section-padding;
+  min-height: Calc(100vh - 80px);
+}

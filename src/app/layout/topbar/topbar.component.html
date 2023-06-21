@@ -1,0 +1,35 @@
+<header id="page-topbar" class="shadow">
+  <div class="navbar-header d-flex justify-content-between">
+    <div>
+      <a (click)="emitCollapseToggle()" class="btn ">
+        <svg width="23" height="17" viewBox="0 0 23 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="22.5" y1="0.5" x2="0.5" y2="0.499998" stroke="#0663A0" stroke-linecap="round"/>
+          <line x1="22.5" y1="8.5" x2="0.5" y2="8.5" stroke="#0663A0" stroke-linecap="round"/>
+          <line x1="22.5" y1="16.5" x2="0.5" y2="16.5" stroke="#0663A0" stroke-linecap="round"/>
+          </svg>
+          
+      </a>
+    </div>
+    <!--End d-flex-->
+
+    <div class="me-3" *ngIf="user$ |async as user" routerLink="/layout/profile">
+      <button
+        type="button"
+        class="btn header-item d-flex"
+        ngbDropdownToggle
+        id="page-header-user-dropdown"
+      >
+        <img
+          class="rounded-circle header-profile-user"
+          src="../../../assets/Avatars/avatar.png"
+          alt="Header Avatar"
+        />
+
+        <div class="text-start ms-2" >
+          <span class="d-none d-xl-block ms-1">{{user[0].name}} </span>
+          <span class="d-none d-xl-block ms-1 ">{{user[0].email}} </span>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>

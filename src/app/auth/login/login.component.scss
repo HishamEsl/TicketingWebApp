@@ -1,0 +1,35 @@
+@import "../../../assets/scss/global";
+@import "../../../assets/scss/varibles";
+
+
+.login{
+    padding: $section-padding;
+    background-image: url('../../../assets/icons/png/login-bg.jpg');
+    height: 100vh !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .card{
+        padding: 64px 40px;
+
+        @media (max-width: 767px) {
+          padding: 0;
+              }
+        h5{
+            font-size: $fs-xl;
+            font-weight: $fw-lg;
+        }
+
+        form{
+           margin-top: 48px; 
+           @media (max-width: 767px) {
+           }
+           .login-btn{
+            margin-top: 44px;
+            @media (max-width: 767px) {
+            margin-top: 10px;
+                    }
+           }
+        }
+    }
+}
