@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TicketService } from 'src/app/shared/services/ticket.service';
 import Swal from 'sweetalert2';
 
@@ -15,12 +16,15 @@ import Swal from 'sweetalert2';
 })
 export class ProjectsComponent implements OnInit {
   addNewProjectForm!: FormGroup;
-
-  companies$ = this._ticketService.companies$;
+  searchText = '';
+  currentClientId: any = sessionStorage.getItem('UID');
+  companies$ = this._ticketService.clientCompanies(this.currentClientId);
+  projects$ = this._ticketService.clientProjects(this.currentClientId);
   clients$ = this._ticketService.clients$;
   constructor(
     private formBuilder: FormBuilder,
-    private _ticketService: TicketService
+    private _ticketService: TicketService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +32,7 @@ export class ProjectsComponent implements OnInit {
     this.addNewProjectForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
       companyId: new FormControl('', [Validators.required]),
-      clientId: new FormControl('', [Validators.required]),
+      // clientId: new FormControl('', [Validators.required]),
     });
   }
 
@@ -36,14 +40,15 @@ export class ProjectsComponent implements OnInit {
     const obj: any = {
       name: this.addNewProjectForm.controls['name'].value,
       companyId: +this.addNewProjectForm.controls['companyId'].value,
-      clientId: this.addNewProjectForm.controls['clientId'].value,
+      // clientId: this.addNewProjectForm.controls['clientId'].value,
+      clientId: sessionStorage.getItem('UID'),
     };
 
     this._ticketService.postProject(obj).subscribe((e) => {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'company has been Created ',
+        title: 'Project has been Created ',
         showConfirmButton: false,
         timer: 1500,
       });
@@ -52,5 +57,9 @@ export class ProjectsComponent implements OnInit {
 
   get f() {
     return this.addNewProjectForm.controls;
+  }
+
+  openLg(ticketsContent: any) {
+    this.modalService.open(ticketsContent, { size: 'lg' });
   }
 }

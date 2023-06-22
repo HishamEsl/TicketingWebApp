@@ -8,3 +8,18 @@
 
     
 }
+
+
+.table-responsive {
+    tr {
+      background-color: #fff;
+
+      td {
+        padding: 16px;
+      }
+    }
+
+    .badge {
+      min-width:80px;
+    }
+  }

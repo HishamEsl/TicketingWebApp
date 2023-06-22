@@ -171,6 +171,7 @@
               </form>
 
               <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
+              <div *ngIf="IsHoldMessage" class="text-success">{{ IsHoldMessage }}</div>
 
               <p class="mt-5">
                 Already have an account?<a class="mx-2 txt-primary" routerLink="/auth/login">Login</a>

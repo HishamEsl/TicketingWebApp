@@ -26,6 +26,8 @@ export class TicketService {
   private accountURL = 'odata/accounts';
   private companiesURL = 'odata/companies';
   private clientURL = 'odata/clients';
+  private roleURL = 'odata/roles';
+  private userRoleURL = 'odata/userroles';
 
   clientIdSelectedSubject = new BehaviorSubject<string>('');
   clientIdSelectedAction$ = this.clientIdSelectedSubject.asObservable();
@@ -167,6 +169,16 @@ export class TicketService {
       );
   }
 
+  // // Get All Users
+  users$ = this._http
+    .get<any[]>(UrlEndpoints.apiRoot + this.usersURL)
+    .pipe(
+      map((users: any) => {
+        return users['value'] as any[];
+      }),
+      shareReplay(1)
+    );
+
   getUser(userId: string) {
     return this._http
       .get<IEmployee[]>(
@@ -231,18 +243,36 @@ export class TicketService {
       );
   }
 
-    // Post Company
-    postProject(model: any) {
-      return this._http
-        .post<any>(UrlEndpoints.apiRoot + this.projectsURL, model)
-        .pipe(
-          map((project: any) => {
-            return project as any;
-          }),
-          shareReplay(1)
-        );
-    }
-  
+  // Post Company
+  postProject(model: any) {
+    return this._http
+      .post<any>(UrlEndpoints.apiRoot + this.projectsURL, model)
+      .pipe(
+        map((project: any) => {
+          return project as any;
+        }),
+        shareReplay(1)
+      );
+  }
+
+  //Get Client Companies
+
+  clientProjects(clientId: string) {
+    return this._http
+      .get<IProject[]>(
+        UrlEndpoints.apiRoot +
+          this.projectsURL +
+          '?$filter=clientId eq ' +
+          `'${clientId}' &expand=client,company`
+      )
+      .pipe(
+        map((projects: any) => {
+          return projects['value'] as IProject[];
+        }),
+        shareReplay(1)
+      );
+  }
+
   // // Get All Status
   statuses$ = this._http
     .get<IStatus[]>(UrlEndpoints.apiRoot + this.allStatusURL)
@@ -272,13 +302,30 @@ export class TicketService {
 
   // get All  compnanies
   companies$ = this._http
-    .get<any[]>(UrlEndpoints.apiRoot + this.companiesURL)
+    .get<any[]>(UrlEndpoints.apiRoot + this.companiesURL + `?$expand=client`)
     .pipe(
       map((companies: any) => {
         return companies['value'] as any[];
       }),
       shareReplay(1)
     );
+  //Get Client Companies
+
+  clientCompanies(clientId: string) {
+    return this._http
+      .get<any[]>(
+        UrlEndpoints.apiRoot +
+          this.companiesURL +
+          '?$filter=clientId eq ' +
+          `'${clientId}'`
+      )
+      .pipe(
+        map((companies: any) => {
+          return companies['value'] as any[];
+        }),
+        shareReplay(1)
+      );
+  }
 
   //Remove Company
   removeCompany = (companyId: number) =>
@@ -299,15 +346,30 @@ export class TicketService {
   }
 
   // get All Clients
-  clients$ = this._http
-    .get<any[]>(
-      UrlEndpoints.apiRoot +
-        this.clientURL
-    )
-    .pipe(
-      map((clients: any) => {
-        return clients as any[];
-      }),
-      shareReplay(1)
-    );
+  clients$ = this._http.get<any[]>(UrlEndpoints.apiRoot + this.clientURL).pipe(
+    map((clients: any) => {
+      return clients as any[];
+    }),
+    shareReplay(1)
+  );
+
+  // All Roles
+  roles$ = this._http.get<any[]>(UrlEndpoints.apiRoot + this.roleURL).pipe(
+    map((roles: any) => {
+      return roles['value'] as any[];
+    }),
+    shareReplay(1)
+  );
+
+  // Post Company
+  postUserRole(model: any) {
+    return this._http
+      .post<any>(UrlEndpoints.apiRoot + this.userRoleURL, model)
+      .pipe(
+        map((user: any) => {
+          return user as any;
+        }),
+        shareReplay(1)
+      );
+  }
 }

@@ -1,70 +1,124 @@
-<section class="tickets section-bg">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 heading d-flex justify-content-between">
-      <div>
-        <h2>Add New Project</h2>
-      </div>
+
+  
 
 
 
+      <section class="tickets section-bg">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 heading d-flex justify-content-between">
+          <div>
+            <h2>All Projects</h2>
+          </div>
+         <div class="d-flex">
+          <div class="d-flex mx-3">
+    
+          </div>
+          <button type="button" class="btn btn-main" (click)="openLg(ticketsContent)" > Add New Project </button>
+        
+        </div>
+    
+      
+            </div>
+          </div>
+          <div class="row">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class>
+                  <div class="table-responsive" *ngIf="projects$ |async as projects">
+                    <table
+                      class="table project-list-table table-nowrap align-middle table-borderless"
+                    >
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col" style="width: 100px">#</th> -->
+                          <th scope="col">Project Name</th>
+                          <th scope="col">Client Name </th>
+                          <th scope="col">Company Name</th>
+                          <th scope="col"> Finished </th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let project of projects ">
+                          <!-- <td>{{project.id}}</td> -->
+                          <td>
+                            <h5 class="text-truncate font-size-14">
+                              <a href="javascript: void(0);" class="text-dark"
+                                >{{project.name}}
+                              </a>
+                            </h5>
+                            <!-- <p class="text-muted mb-0">{{project.subtext}}</p> -->
+                          </td>
+                          <td>{{project.client.firstName +' '  +project.client.lastName}}</td>
+                          <td>{{project.company.name}}</td>
+                          <td>{{project.isFinished?'Yes':'No'}}</td>
+                        
+                        
+                        
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+        </div>
+      </section>
 
-      </div>
-      </div>
 
-      <div class="row">
+
+      <ng-template #ticketsContent let-modal>
         <form [formGroup]="addNewProjectForm">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Project</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+
+          
        
    
           
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="name" >Name</label>
-                      <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{
-                        'is-invalid': f['name'].touched && f['name'].errors
-                      }">
-                      <div *ngIf="f['name'].touched && f['name'].errors" class="text-danger">
-                        <span *ngIf="f['name'].errors?.['required']">This value is required.!</span>
-        
-                    </div>
-                    </div>
-                  </div>
-
-
-              <div class="col-md-6" *ngIf="companies$ |async as companies">
-                <div class="mb-3">
-                  <label for="validationCustom01">Company Name </label>
-              
-                  <select id="formrow-inputState" class="form-control" formControlName="companyId" >
-                    <option value="" selected disabled>Select Project</option>
-                    <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
-                </select>
-                  <div *ngIf="f['companyId'].touched && f['companyId'].errors" class="text-danger">
-                    <span *ngIf="f['companyId'].errors?.['required']">This value is required.!</span>
-                </div>
-                </div>
-              </div>
-        
-            </div>
-              <div class="col-md-6" *ngIf="clients$ |async as clients">
-                <div class="mb-3">
-                  <label for="validationCustom01">Client</label>
-              
-                  <select id="formrow-inputState" class="form-control" formControlName="clientId" >
-                    <option value="" selected disabled>Select Project</option>
-                    <option [value]="client.id" *ngFor="let client of clients">{{client.firstName +' ' + client.lastName}}</option>
-                </select>
-                  <div *ngIf="f['clientId'].touched && f['clientId'].errors" class="text-danger">
-                    <span *ngIf="f['clientId'].errors?.['required']">This value is required.!</span>
-                </div>
-                </div>
-              </div>
-  
-         
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="name" >Name</label>
+                    <input type="text" class="form-control" id="name" formControlName="name" [ngClass]="{
+                      'is-invalid': f['name'].touched && f['name'].errors
+                    }">
+                    <div *ngIf="f['name'].touched && f['name'].errors" class="text-danger">
+                      <span *ngIf="f['name'].errors?.['required']">This value is required.!</span>
       
-            <button type="button" class="btn btn-main" (click)="onCreatNewProjectClicked() " [disabled]="addNewProjectForm.invalid">Send</button>
-      </form>
-      </div>
-      </div>
-      </section>
+                  </div>
+                  </div>
+                </div>
+
+
+            <div class="col-md-6" *ngIf="companies$ |async as companies">
+              <div class="mb-3">
+                <label for="validationCustom01">Company Name </label>
+            
+                <select id="formrow-inputState" class="form-control" formControlName="companyId" >
+                  <option value="" selected disabled>Select Project</option>
+                  <option [value]="company.id" *ngFor="let company of companies">{{company.name}}</option>
+              </select>
+                <div *ngIf="f['companyId'].touched && f['companyId'].errors" class="text-danger">
+                  <span *ngIf="f['companyId'].errors?.['required']">This value is required.!</span>
+              </div>
+              </div>
+            </div>
+      
+          </div>
+          
+
+            <div class="modal-footer">
+    
+          <button type="button" class="btn btn-main" (click)="onCreatNewProjectClicked(); modal.dismiss('Cross click') " [disabled]="addNewProjectForm.invalid">Send</button>
+ </div>
+ </div>
+</form>
+      </ng-template>
+      

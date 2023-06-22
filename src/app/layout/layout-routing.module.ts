@@ -21,6 +21,14 @@ const routes: Routes = [
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
+        path: 'administration',
+        canActivate: [AdminGuard],
+        loadChildren: () =>
+          import('./administration/administration.module').then(
+            (m) => m.AdministrationModule
+          ),
+      },
+      {
         path: 'teams',
         canActivate: [AdminGuard],
         loadChildren: () =>
@@ -42,7 +50,7 @@ const routes: Routes = [
       },
       {
         path: 'projects',
-        canActivate: [AdminGuard],
+        canActivate: [ClientGuard],
         loadChildren: () =>
           import('./projects/projects.module').then((m) => m.ProjectsModule),
       },

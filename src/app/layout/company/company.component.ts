@@ -18,7 +18,7 @@ export class CompanyComponent implements OnInit {
   searchText = '';
 
   companies$ = this._ticketService.companies$;
-
+  clients$ = this._ticketService.clients$;
   addNewCompanyForm!: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -30,12 +30,14 @@ export class CompanyComponent implements OnInit {
     /* Init New Ticket Form */
     this.addNewCompanyForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required]),
+      clientId: new FormControl('', [Validators.required]),
     });
   }
 
   onCreatNewCompanyClicked() {
     const obj: any = {
       name: this.addNewCompanyForm.controls['name'].value,
+      clientId: this.addNewCompanyForm.controls['clientId'].value,
     };
     this._ticketService.postCompany(obj).subscribe((e) => {
       Swal.fire({
